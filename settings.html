@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script src="tizen-web-ui-fw/latest/js/jquery.js"></script>
+<script src="tizen-web-ui-fw/latest/js/tizen-web-ui-fw-libs.js"></script>
+<script src="tizen-web-ui-fw/latest/js/tizen-web-ui-fw.js" data-framework-viewport-scale=“true” data-framework-theme="tizen-white"></script>
+<script>
+$('#0').bind('click', function () {
+	$.mobile.changePage("settings_moodNotification.html", {transition: "slide"} );
+});
+</script>
+<script type="text/javascript" src="./js/main.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/style.css" />
+</head>
+<body>
+	<!-- Start of fourth page: #settings -->
+	<div data-role="page" id="settings" data-add-back-btn="true">
+		<div data-role="header" data-position="fixed">
+			<h1>MoodiModo</h1>
+			
+		</div>
+		<!-- /header -->
+
+		<div data-role="content">
+			<h2>Settings</h2>
+
+		<ul id="mainList" data-role="listview">
+			<li id="0" class="ui-li-has-multiline">
+				<a  data-transition="slide" href="settings_moodNotification.html"> 
+					Ask for your mood
+					<span class="ui-li-text-sub">Every three hours</span>
+					<div data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" data-transition="slide" href="settings_moodNotification.html"></div>
+					
+				</a>
+			</li>
+		</ul>
+		
+		<div id="notification" data-role="popup">
+			   <ul data-role="listview">
+			      <li class="text">
+			         <a href="#">Never</a>
+			      </li>
+			      <li class="text">
+			         <a href="#">Hourly</a>
+			      </li>
+			      <li class="text">
+			         <a href="#">Every three hours</a>
+			      </li>
+			      <li class="text">
+			         <a href="#">Twice daily</a>
+			      </li>
+			      <li class="text">
+			         <a href="#">Daily</a>
+			      </li>
+			   </ul>
+			</div>
+		</div> <!-- /content -->
+		
+		<div data-role="footer" data-position="fixed">
+		</div>
+		<!-- /footer -->
+	</div>
+	<!-- /page #settings -->
+	
+
+
+</body>
+</html>

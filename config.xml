@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/MoodiModo" version="1.0.0" viewmodes="maximized">
+    <tizen:application id="bELa1lU4il.MoodiModo" package="bELa1lU4il" required_version="1.0"/>
+    <content src="index.html"/>
+    <icon src="res/icon.png"/>
+    <name>MoodiModo</name>
+    <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
+    <tizen:privilege name="http://tizen.org/privilege/alarm"/>
+    <tizen:privilege name="http://tizen.org/privilege/alarm.read"/>
+    <tizen:privilege name="http://tizen.org/privilege/alarm.write"/>
+    <tizen:privilege name="http://tizen.org/privilege/notification"/>
+	<tizen:privilege name="http://tizen.org/privilege/notification.read"/> 
+	<tizen:privilege name="http://tizen.org/privilege/notification.write"/>  
+    
+    <feature name="http://tizen.org/api/alarm" required="true"/>
+    <feature name="http://tizen.org/api/alarm.read" required="true"/>
+    <feature name="http://tizen.org/api/alarm.write" required="true"/>
+    <feature name="http://tizen.org/api/application" required="true"/>
+    <feature name="http://tizen.org/api/application.kill" required="true"/>
+    <feature name="http://tizen.org/api/application.launch" required="true"/>
+    <feature name="http://tizen.org/api/application.read" required="true"/>
+    <feature name="http://tizen.org/api/systeminfo" required="true"/>
+    <feature name="http://tizen.org/api/time" required="true"/>
+    <feature name="http://tizen.org/api/time.read" required="true"/>
+    <feature name="http://tizen.org/api/time.write" required="true"/>
+    <feature name="http://tizen.org/api/tizen" required="true"/>
+    
+    <tizen:setting screen-orientation="portrait" context-menu="disable" background-support="disable" encryption="disable" install-location="auto" hwkey-event="enable"/>
+    
+	<tizen:app-control>
+		<tizen:src name="report_mood.html" />
+		<tizen:operation name="http://tizen.org/appcontrol/operation/report_mood" />
+	</tizen:app-control>
+	   
+</widget>
