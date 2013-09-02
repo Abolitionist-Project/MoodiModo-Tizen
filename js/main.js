@@ -135,10 +135,12 @@ function dateToDMYHMS(date) {
 	weekday[5]="Friday";
 	weekday[6]="Saturday";
 	
+	function pad(n){return n<10 ? '0'+n : n}
+	
 	var dayName = weekday[date.getDay()];
-	var hour = date.getHours();
-	var minutes = date.getMinutes();
-	var seconds = date.getSeconds();
+	var hour = pad(date.getHours());
+	var minutes = pad(date.getMinutes());
+	var seconds = pad(date.getSeconds());
 
 	//TODO check if < 9, if so: add 0
 	return dayName + ", " + date.toLocaleDateString() + " " + hour + ":" + minutes + ':' + seconds;

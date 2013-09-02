@@ -35,16 +35,6 @@ $('#settingsButton').bind('click', function () {
 	<div data-role="page" id="home">
 		<div data-role="header" data-id="headerNav" data-position="fixed">
 			<h1>MoodiModo</h1>
-			
-			<!--Context pop-up-->
-			<div id="menuPopupHome" data-role="popup">
-			   <ul data-role="listview">
-			      <li class="text">
-			         <a href="settings.html" data-transition="pop">Settings</a>
-			      </li>
-			   </ul>
-			</div>
-			
 			<div data-role="tabbar" style="margin-top: 10px">
 				<ul>
 					<li><a href="#home" class="ui-btn-active ui-state-persist">Home</a></li>
@@ -54,7 +44,16 @@ $('#settingsButton').bind('click', function () {
 			</div>
 		</div>
 		<!-- header -->
-
+		
+		<!--Context pop-up-->
+		<div id="menuPopupHome" data-role="popup">
+		   <ul data-role="listview">
+		      <li class="text">
+		         <a href="settings.html" data-transition="pop">Settings</a>
+		      </li>
+		   </ul>
+		</div>
+			
 		<div data-role="content">
 			<h2 id="pageHeader">Visual</h2>
 			<script type="text/javascript">
@@ -145,32 +144,32 @@ $('#settingsButton').bind('click', function () {
 
 		<ul id="mainList" data-role="listview">
 			<li id="4">
-				<a onclick="saveMood(4, true)" data-transition="slide" data-direction="reverse"> 
+				<a onclick="saveMood(4, true)"> 
 					Ecstatic
 					<img src="res/ic_mood_ecstatic.png" class="ui-li-bigicon" />
 				</a>
 			</li>
 			<li id="3">
 			
-				<a onclick="saveMood(3, true)" data-transition="slide" data-direction="reverse"> 
+				<a onclick="saveMood(3, true)"> 
 					Happy
 					<img src="res/ic_mood_happy.png" class="ui-li-bigicon" />
 				</a>
 			</li>
 			<li id="2">
-				<a onclick="saveMood(2, true)" data-transition="slide" data-direction="reverse"> 
+				<a onclick="saveMood(2, true)"> 
 					Ok
 					<img src="res/ic_mood_ok.png" class="ui-li-bigicon" />
 				</a>
 			</li>
 			<li id="1" >
-				<a onclick="saveMood(1, true)" data-transition="slide" data-direction="reverse"> 
+				<a onclick="saveMood(1, true)"> 
 					Sad
 					<img src="res/ic_mood_sad.png" class="ui-li-bigicon" />
 				</a>
 			</li>
 			<li id="0">
-				<a onclick="saveMood(0, true)" data-transition="slide" data-direction="reverse"> 
+				<a onclick="saveMood(0, true)"> 
 					Suicidal
 					<img src="res/ic_mood_depressed.png" class="ui-li-bigicon" />
 				</a>
