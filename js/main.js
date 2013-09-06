@@ -90,11 +90,6 @@ function fillHistory()
 		console.log("in for");
 		addElementToHistory(historyData[i], i);
 	}
-
-	/*console.log("in for");
-	document.getElementById("historyList").innerHTML += "<li id='0' class='ui-li-has-multiline'><a href='settings_moodNotification.html'>" +
-	"Ask for your mood <span class='ui-li-text-sub'>Every three hours</span> <div data-role='button' data-inline='true' data-icon='arrow-r' " +
-	"data-style='circle' href='settings_moodNotification.html'></div></a></li>";*/
 }
 
 function addElementToHistory(mood, i)
@@ -117,11 +112,6 @@ function addElementToHistory(mood, i)
 	moodName = moodName[mood.mood];
 	$('#historyList').append("<li id='" + i + "' class='ui-li-has-multiline'>" +
 			moodName + "<span class='ui-li-text-sub'>" + dateString + "</span></div></li>");
-	
-	
-//	document.getElementById("historyList").innerHTML += "<li id='" + i + "' class='ui-li-has-multiline'><a href='settings_moodNotification.html'>" +
-//	moodName + "<span class='ui-li-text-sub'>" + dateString + "</span></div></a></li>";
-	//" " + date.toLocaleTimeString() + 
 }
 
 
@@ -146,39 +136,17 @@ function dateToDMYHMS(date) {
 	return dayName + ", " + date.toLocaleDateString() + " " + hour + ":" + minutes + ':' + seconds;
 	
 }
-/*
-function addElementToHistory(mood, i)
-{
-	var moodName;
-	var moodDate = new Date();
-	moodDate.setSeconds(mood.timestamp, 0);
 
-	var dateString = dateToDMYHSM(moodDate);
-	
-	if(mood.mood == 0)
-	{
-		moodName = "Suicidal";
-	}
-	if(mood.mood == 1)
-	{
-		moodName = "Sad";
-	}
-	if(mood.mood == 2)
-	{
-		moodName = "OK";
-	}
-	if(mood.mood == 3)
-	{
-		moodName = "Happy";
-	}
-	if(mood.mood == 4)
-	{
-		moodName = "Ecstatic";
-	}
-	document.getElementById("historyList").innerHTML += "<li id='" + i + "' class='ui-li-has-multiline'><a href='settings_moodNotification.html'>" +
-	moodName + "<span class='ui-li-text-sub'>" + dateString + "</span></div></a></li>";
+function welcomeWizardCompleted() {
+
+	var timestamp = new Date().getTime() / 1000;
+	self.insertMood(timestamp, parseInt(localStorage.getItem("firstMood")));
+
+	console.log("first mood stored with timestamp: " + timestamp + " and moodId: " + localStorage.getItem("firstMood"));
+	localStorage.setItem("firstStartup", false);
+	localStorage.removeItem("firstMood");
 }
- */
+
 //------------------init------------------//
 
 var init = function() {
@@ -204,12 +172,15 @@ var init = function() {
 				}
 		        else if (e.keyName === 'menu') 
 		        {
-		           console.log('in the menu yay');
+		        	//TODO: open menu popup
+		        	if(activePage === 'home')
+					{
+		        		//$('.menuPopup').popup('open');
+					}
 		        }
 			});
 	console.log("init() called");
 	
-	tizen.alarm.removeAll();
 	var alarms = tizen.alarm.getAll();
 	console.log(alarms.length + " alarms present in the storage.");
 	/*try
@@ -228,6 +199,21 @@ var init = function() {
 	console.log("moodNotificationInterval: " + getMoodNotificationInterval());	
 
 };
+
+//TODO: conditional init for welcome wizard
+$(document).delegate('#home', 'pagebeforecreate', function() {
+	var firstStartup = localStorage.getItem("firstStartup");
+	if(firstStartup===null || firstStartup=="true")
+	{
+		alert("first startup");
+		$.mobile.changePage("welcome.html");
+	}
+	else
+	{
+		alert("not first startup");
+	}
+});
+
 $( "#historyList" ).listview({
 	   create: function(event, ui) {  }
 	});
@@ -246,6 +232,3 @@ $(document).delegate('#history', 'pageshow', function() {
 	fillHistory();
 	$('#historyList').listview('refresh');
 });
-
-
-//TODO fillHistory() on page init/beforeshow without losing css...

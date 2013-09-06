@@ -6,11 +6,6 @@
 <script src="tizen-web-ui-fw/latest/js/jquery.js"></script>
 <script src="tizen-web-ui-fw/latest/js/tizen-web-ui-fw-libs.js"></script>
 <script src="tizen-web-ui-fw/latest/js/tizen-web-ui-fw.js" data-framework-viewport-scale=“true” data-framework-theme="tizen-white"></script>
-<script>
-$('#0').bind('click', function () {
-	$.mobile.changePage("settings_moodNotification.html", {transition: "slide"} );
-});
-</script>
 <script type="text/javascript" src="./js/main.js"></script>
 <link rel="stylesheet" type="text/css" href="./css/style.css" />
 </head>
@@ -31,36 +26,17 @@ $('#0').bind('click', function () {
 				<a  data-transition="slide" href="settings_moodNotification.html"> 
 					Ask for your mood
 					<span class="ui-li-text-sub">Every three hours</span>
-					<div data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" data-transition="slide" href="settings_moodNotification.html"></div>
+					<div data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" data-transition="slide" href="settings_moodNotification.html"/>
 					
 				</a>
 			</li>
 		</ul>
 		
-		<div id="notification" data-role="popup">
-			   <ul data-role="listview">
-			      <li class="text">
-			         <a href="#">Never</a>
-			      </li>
-			      <li class="text">
-			         <a href="#">Hourly</a>
-			      </li>
-			      <li class="text">
-			         <a href="#">Every three hours</a>
-			      </li>
-			      <li class="text">
-			         <a href="#">Twice daily</a>
-			      </li>
-			      <li class="text">
-			         <a href="#">Daily</a>
-			      </li>
-			   </ul>
-			</div>
-		</div> <!-- /content -->
 		
-		<div data-role="footer" data-position="fixed">
-		</div>
-		<!-- /footer -->
+	</div>
+	<div data-role="footer" data-position="fixed">
+	</div>
+	<!-- /footer -->
 	</div>
 	<!-- /page #settings -->
 	

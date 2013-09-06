@@ -36,3 +36,8 @@ html, body {
 	color: #5D83FF;
 	margin-bottom: -5px;
 }
+
+#welcomeText {
+	color: #313F66;
+	font-size: large;
+}

@@ -257,20 +257,27 @@ function getLineChartData()
 
 function saveMood(mood, manually)
 {
-	var timestamp = new Date().getTime() / 1000;
-	self.insertMood(timestamp, mood);
-	console.log("new mood stored with timestamp: " + timestamp + " and moodId: " + mood);
 	
 	if(manually == "true" || manually == true)
 	{
+		var timestamp = new Date().getTime() / 1000;
+		self.insertMood(timestamp, mood);
+		console.log("new mood stored with timestamp: " + timestamp + " and moodId: " + mood);
 		alert("Your reported mood has been saved.");
 		parent.history.back();
 	}
+	else if(manually == "false" || manually == false)
+	{
+		var timestamp = new Date().getTime() / 1000;
+		self.insertMood(timestamp, mood);
+		console.log("new mood stored with timestamp: " + timestamp + " and moodId: " + mood);
+		tizen.application.getCurrentApplication().exit();
+	}	
 	else
 	{
-		tizen.application.getCurrentApplication().exit();
+		localStorage.setItem("firstMood", mood);
+		console.log("first mood welcome wizard with moodId: " + mood);
 	}
-	
 }
 
 /*function saveMood(mood)

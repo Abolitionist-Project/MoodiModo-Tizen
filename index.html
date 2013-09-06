@@ -18,11 +18,6 @@
 <script src="tizen-web-ui-fw/latest/js/tizen-web-ui-fw.js" data-framework-viewport-scale=“true” data-framework-theme="tizen-white"></script>
 <script type="text/javascript" src="./js/highcharts.src.js"></script>
 
-<script>
-$('#settingsButton').bind('click', function () {
-	$.mobile.changePage("settings.html", {transition: "slide"} );
-});
-</script>
 <script type="text/javascript" src="./js/main.js"></script>
 <script type="text/javascript" src="./js/charts.js"></script>
 <script type="text/javascript" src="./js/alarms.js"></script>
@@ -46,7 +41,7 @@ $('#settingsButton').bind('click', function () {
 		<!-- header -->
 		
 		<!--Context pop-up-->
-		<div id="menuPopupHome" data-role="popup">
+		<div id="menuPopupHome" class="menuPopup" data-role="popup">
 		   <ul data-role="listview">
 		      <li class="text">
 		         <a href="settings.html" data-transition="pop">Settings</a>
@@ -89,7 +84,7 @@ $('#settingsButton').bind('click', function () {
 		</div>
 		<!-- /header -->
 		
-		<div id="menuPopupHistory" data-role="popup">
+		<div id="menuPopupHistory" class="menuPopup" data-role="popup">
 		   <ul data-role="listview">
 		      <li class="text">
 		         <a href="settings.html" data-transition="pop">Settings</a>
@@ -131,7 +126,7 @@ $('#settingsButton').bind('click', function () {
 		<!-- /header -->
 		
 		<!--Context pop-up-->
-			<div id="menuPopupReporting" data-role="popup">
+			<div id="menuPopupReporting" class="menuPopup" data-role="popup">
 			   <ul data-role="listview">
 			      <li class="text">
 			         <a href="settings.html" data-transition="pop">Settings</a>
