@@ -46,6 +46,7 @@ function setCheckedValue(radioObj, newValue) {
 			$("#radio-" + i).prop("checked", true).checkboxradio("refresh");
 			console.log("checkedRadio: " + radioObj[i].value);
 			console.log("moodNotificationInterval: " + getMoodNotificationInterval());
+			localStorage.s
 		}
 		else 
 		{
@@ -100,7 +101,7 @@ function addElementToHistory(mood, i)
 	console.log("mooddate: " + moodDate);
 	var date = new Date(moodDate);
 
-	console.log("mooddate offset: " + date.getTimezoneOffset());
+	console.log("found moodId: " + mood.moodId);
 	var dateString = dateToDMYHMS(date);
 	var moodName = new Array(5);
 	moodName[0]="Suicidal";
@@ -109,7 +110,7 @@ function addElementToHistory(mood, i)
 	moodName[3]="Happy";
 	moodName[4]="Ecstatic";
 	
-	moodName = moodName[mood.mood];
+	moodName = moodName[mood.moodId];
 	$('#historyList').append("<li id='" + i + "' class='ui-li-has-multiline'>" +
 			moodName + "<span class='ui-li-text-sub'>" + dateString + "</span></div></li>");
 }
@@ -200,8 +201,11 @@ var init = function() {
 
 };
 
-//TODO: conditional init for welcome wizard
-$(document).delegate('#home', 'pagebeforecreate', function() {
+/*$(document).bind("mobileinit", function(){
+    $.mobile.autoInitialize = false;
+  });
+
+$(document).ready(function(){
 	var firstStartup = localStorage.getItem("firstStartup");
 	if(firstStartup===null || firstStartup=="true")
 	{
@@ -210,7 +214,25 @@ $(document).delegate('#home', 'pagebeforecreate', function() {
 	}
 	else
 	{
+		$.mobile.initializePage();
 		alert("not first startup");
+	}
+});*/
+
+
+
+//TODO: conditional init for welcome wizard
+$(document).delegate('#home', 'pagebeforecreate', function() {
+	var firstStartup = localStorage.getItem("firstStartup");
+	if(firstStartup===null || firstStartup=="true")
+	{
+		//alert("first startup");
+		$.mobile.changePage("welcome.html");
+		
+	}
+	else
+	{
+		//alert("not first startup");
 	}
 });
 
@@ -227,7 +249,7 @@ $(document).delegate('#history', 'pagecreate', function() {
 });
 
 $(document).delegate('#history', 'pageshow', function() {
-	historyData = getMoodData();
+	historyData = moodData;
 	$("#historyList").empty();
 	fillHistory();
 	$('#historyList').listview('refresh');

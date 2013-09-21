@@ -23,12 +23,33 @@
 
 		<ul id="mainList" data-role="listview">
 			<li id="0" class="ui-li-has-multiline">
-				<a  data-transition="slide" href="settings_moodNotification.html"> 
+				<a id="askOption" data-transition="slide" href="settings_moodNotification.html"> 
 					Ask for your mood
-					<span class="ui-li-text-sub">Every three hours</span>
-					<div data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" data-transition="slide" href="settings_moodNotification.html"/>
 					
+					<script>
+						if(getMoodNotificationInterval() == 0)
+						{
+							document.getElementById("askOption").innerHTML+="<span class=\"ui-li-text-sub\">Never</span>";
+						}
+						else if(getMoodNotificationInterval() == 1)
+						{
+							document.getElementById("askOption").innerHTML+="<span class=\"ui-li-text-sub\">Hourly</span>";
+						}
+						else if(getMoodNotificationInterval() == 2)
+						{
+							document.getElementById("askOption").innerHTML+="<span class=\"ui-li-text-sub\">Every three hours</span>";
+						}
+						else if(getMoodNotificationInterval() == 3)
+						{
+							document.getElementById("askOption").innerHTML+="<span class=\"ui-li-text-sub\">Twice daily</span>";
+						}
+						else if(getMoodNotificationInterval() == 4)
+						{
+							document.getElementById("askOption").innerHTML+="<span class=\"ui-li-text-sub\">Daily</span>";
+						}
+					</script>
 				</a>
+				<div data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" onclick="location.href='settings_moodNotification.html'"></div>
 			</li>
 		</ul>
 		

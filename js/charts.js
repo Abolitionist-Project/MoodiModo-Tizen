@@ -111,10 +111,10 @@ var initCharts = function() {
 
 $(document).delegate('#home', 'pageshow', function() {
 	console.log("charts pageshow");
-	getBarChartData();
+	//getBarChartData();
 	console.log("db manager barchart data to chart data");
 	getLineChartData();
 	//getMoodData();
-	//getBarChartData();
+	getBarChartData();
 	initCharts();
 });
