@@ -1,5 +1,6 @@
 
 var moodData = new Array();
+var detailedMood;
 /*
 window.indexedDB = window.webkitIndexedDB;
 
@@ -188,7 +189,28 @@ moodiModoDB.indexedDB.addMood = function(moodResult) {
 
 	var data = {
 			"timestamp": new Date().getTime() / 1000,
-			"moodId": moodResult
+			"moodId": parseInt(moodResult.moodId, 10),
+			"accurateMood": parseInt(moodResult.accurateMood, 10),
+			"guilty": parseInt(moodResult.guilty, 10),
+			"alert": parseInt(moodResult.alert, 10),
+			"afraid": parseInt(moodResult.afraid, 10),
+			"excited": parseInt(moodResult.excited, 10),
+			"irritable": parseInt(moodResult.irritable, 10),
+			"ashamed": parseInt(moodResult.ashamed, 10),
+			"attentive": parseInt(moodResult.attentive, 10),
+			"hostile": parseInt(moodResult.hostile, 10),
+			"active": parseInt(moodResult.active, 10),
+			"nervous": parseInt(moodResult.nervous, 10),
+			"interested": parseInt(moodResult.interested, 10),
+			"enthusiastic": parseInt(moodResult.enthusiastic, 10),
+			"jittery": parseInt(moodResult.jittery, 10),
+			"strong": parseInt(moodResult.strong, 10),
+			"distressed": parseInt(moodResult.distressed, 10),
+			"determined": parseInt(moodResult.determined, 10),
+			"upset": parseInt(moodResult.upset, 10),
+			"proud": parseInt(moodResult.proud, 10),
+			"scared": parseInt(moodResult.scared, 10),
+			"inspired": parseInt(moodResult.inspired, 10)
 	};
 
 	var request = store.put(data);
@@ -251,6 +273,39 @@ moodiModoDB.indexedDB.getAllTodoItems = function() {
 
 	cursorRequest.onerror = moodiModoDB.indexedDB.onerror;
 };
+
+moodiModoDB.indexedDB.getTodoItem = function(timeStamp) {
+	//var todos = document.getElementById("todoItems");
+	//todos.innerHTML = "";
+
+	var db = moodiModoDB.indexedDB.db;
+	var trans = db.transaction("moodEntry", "readonly");
+	var store = trans.objectStore("moodEntry");
+	
+	var request = store.get(timeStamp);
+	request.onerror = function(event) {
+	  // Handle errors!
+	};
+	request.onsuccess = function(event) {
+		// Do something with the request.result!
+		//alert("MoodId for timestamp is " + request.result.moodId);
+		//localStorage.setItem("detailedMood", request.result);
+		//showMoodDetails(request.result);
+		detailedMood = request.result;
+	};
+	
+	/*var request = store.get(timeStamp);
+	//showMoodDetails(request);
+
+	request.onsuccess = function(e) {
+
+		console.log("g: ", request.result);
+		showMoodDetails(request.result);
+	};
+
+	request.onerror = moodiModoDB.indexedDB.onerror;*/
+};
+
 
 function getBarChartData()
 {
@@ -328,20 +383,31 @@ function saveMood(moodId, manually)
 {
 	if(manually == "true" || manually == true)
 	{
-		moodiModoDB.indexedDB.addMood(moodId);
+		setMoodId(moodId);
+		var moodEntry1 = new moodEntry(questionAnswers);
+		moodiModoDB.indexedDB.addMood(moodEntry1);
+		
+		//moodiModoDB.indexedDB.addMood(moodId);
 		//console.log("new mood stored with timestamp: " + timestamp + " and moodId: " + moodId);
 		//alert("Your reported mood has been saved.");
 		parent.history.back();
 	}
 	else if(manually == "false" || manually == false)
 	{
-		moodiModoDB.indexedDB.addMood(moodId);
+		setMoodId(moodId);
+		var moodEntry2 = new moodEntry(questionAnswers);
+		moodiModoDB.indexedDB.addMood(moodEntry2);
+		//moodiModoDB.indexedDB.addMood(moodId);
 		//console.log("new mood stored with timestamp: " + timestamp + " and moodId: " + mood);
 		tizen.application.getCurrentApplication().exit();
 	}
 	else
 	{
-		moodiModoDB.indexedDB.addMood(moodId);
+		setMoodId(moodId);
+		var moodEntry3 = new moodEntry(questionAnswers);
+		moodiModoDB.indexedDB.addMood(moodEntry3);
+		//localStorage.setItem("firstMood", moodId);
+		//moodiModoDB.indexedDB.addMood(moodId);
 		localStorage.setItem("firstStartup", false);
 	}
 }

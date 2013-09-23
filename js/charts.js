@@ -1,5 +1,5 @@
 //Initialize function
-var moodLabels = [ "Suicidal", "Sad", "Neutral", "Happy", "Ecstatic" ];
+var moodLabels = [ "Suicidal", "Sad", "OK", "Happy", "Ecstatic" ];
 var colors = [ "#55000000", "#5D83FF", "#68B107", "#ffbd40", "#CB0000" ];
 var lineChartData = [];
 var barChartData = [];
@@ -72,7 +72,7 @@ var initBarChart = function() {
 			text : ''
 		},
 		xAxis : {
-			categories : [ 'Suicidal', 'Sad', 'Neutral', 'Happy', 'Ecstatic' ]
+			categories : [ 'Suicidal', 'Sad', 'OK', 'Happy', 'Ecstatic' ]
 		},
 		yAxis : {
 			title : {

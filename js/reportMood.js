@@ -1,4 +1,5 @@
-var questionAnswers = new Array();
+var questionAnswers = new Array(NUM_RESULT_TYPES);
+
 
 var NUM_RESULT_TYPES = 22;
 
@@ -34,42 +35,49 @@ var RATING_INSPIRED = 21;
 
 var averageMood;
 
-var moodEntry = new function(answers) {
-	if(answers.length == NUM_RESULT_TYPES)
+function moodEntry(answers) {
+	
+	console.log("rating mood object: " + answers[RATING_MOOD]);
+	this.moodId = answers[RATING_MOOD];
+    this.accurateMood = answers[RATING_ACCURATE_MOOD];
+    this.guilty = ((answers[RATING_GUILTY] != -1) ? answers[RATING_GUILTY] : -1);
+    this.alert = ((answers[RATING_ALERT] != -1) ? answers[RATING_ALERT] : -1);
+    this.afraid = ((answers[RATING_AFRAID] != -1) ? answers[RATING_AFRAID] : -1);
+    this.excited = ((answers[RATING_EXCITED] != -1) ? answers[RATING_EXCITED] : -1);
+    this.irritable = ((answers[RATING_IRRITABLE] != -1) ? answers[RATING_IRRITABLE] : -1);
+    this.ashamed = ((answers[RATING_ASHAMED] != -1) ? answers[RATING_ASHAMED] : -1);
+    this.attentive = ((answers[RATING_ATTENTIVE] != -1) ? answers[RATING_ATTENTIVE] : -1);
+    this.hostile = ((answers[RATING_HOSTILE] != -1) ? answers[RATING_HOSTILE] : -1);
+    this.active = ((answers[RATING_ACTIVE] != -1) ? answers[RATING_ACTIVE] : -1);
+    this.nervous = ((answers[RATING_NERVOUS] != -1) ? answers[RATING_NERVOUS] : -1);
+    this.interested = ((answers[RATING_INTERESTED] != -1) ? answers[RATING_INTERESTED] : -1);
+    this.enthusiastic = ((answers[RATING_ENTHUSIASTIC] != -1) ? answers[RATING_ENTHUSIASTIC] : -1);
+    this.jittery = ((answers[RATING_JITTERY] != -1) ? answers[RATING_JITTERY] : -1);
+    this.strong = ((answers[RATING_STRONG] != -1) ? answers[RATING_STRONG] : -1);
+    this.distressed = ((answers[RATING_DISTRESSED] != -1) ? answers[RATING_DISTRESSED] : -1);
+    this.determined = ((answers[RATING_DETERMINED] != -1) ? answers[RATING_DETERMINED] : -1);
+    this.upset = ((answers[RATING_UPSET] != -1) ? answers[RATING_UPSET] : -1);
+    this.proud = ((answers[RATING_PROUD] != -1) ? answers[RATING_PROUD] : -1);
+    this.scared = ((answers[RATING_SCARED] != -1) ? answers[RATING_SCARED] : -1);
+    this.inspired = ((answers[RATING_INSPIRED] != -1) ? answers[RATING_INSPIRED] : -1);
+    
+};
+
+function resetQuestionAnswers()
+{
+	questionAnswers = new Array(NUM_RESULT_TYPES);
+	
+	for(var i = 0; i < questionAnswers.length; i++)
 	{
-	    this.moodId = answers[RATING_MOOD];
-	    this.accurateMood = answers[RATING_ACCURATE_MOOD];
-	    this.guilty = answers[RATING_GUILTY];
-	    this.alert = answers[RATING_ALERT];
-	    this.afraid = answers[RATING_AFRAID];
-	    this.excited = answers[RATING_EXCITED];
-	    this.irritable = answers[RATING_IRRITABLE];
-	    this.ashamed = answers[RATING_ASHAMED];
-	    this.attentive = answers[RATING_ATTENTIVE];
-	    this.hostile = answers[RATING_HOSTILE];
-	    this.active = answers[RATING_ACTIVE];
-	    this.nervous = answers[RATING_NERVOUS];
-	    this.interested = answers[RATING_INTERESTED];
-	    this.enthusiastic = answers[RATING_ENTHUSIASTIC];
-	    this.jittery = answers[RATING_JITTERY];
-	    this.strong = answers[RATING_STRONG];
-	    this.distressed = answers[RATING_DISTRESSED];
-	    this.determined = answers[RATING_DETERMINED];
-	    this.upset = answers[RATING_UPSET];
-	    this.proud = answers[RATING_PROUD];
-	    this.scared = answers[RATING_SCARED];
-	    this.inspired = answers[RATING_INSPIRED];
+		questionAnswers[i] = RATING_VALUE_NULL;
 	}
-    
-    /*
-    */
-    
-}();
+}
 
 function setMoodId(moodId)
 {
-	console.log("rating mood: " + moodId);
-	questionAnswers[RATING_MOOD] = moodId;
+	console.log("rating mood setting: " + moodId);
+	questionAnswers[RATING_MOOD] = parseInt(moodId, 10);
+	questionAnswers[RATING_ACCURATE_MOOD] = parseInt(((moodId / 5) * 100), 10);
 }
 function setAccurateMood(accurateMood)
 {
@@ -175,4 +183,11 @@ function setInspired(inspired)
 {
 	console.log("rating inspired: " + inspired);
 	questionAnswers[RATING_INSPIRED] = inspired;
+}
+
+function showMoodDetails(moodEntry)
+{
+	//$('#moodDetails').append("<h4 id='mood'>" + moodEntry.moodId + "</h4>");
+	$.mobile.changePage("mood_details.html");
+	
 }
