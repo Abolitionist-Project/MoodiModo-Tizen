@@ -168,7 +168,7 @@ function showMoodDetails(moodEntry)
 			addElementToMoodDetails(moodEntry[x], x);
 		}
 	}	
-	console.log(text);
+	//console.log(text);
 	//$('#moodDetails').append("<h2 id='pageHeader'> testest</h2>");
 
 	//$.mobile.changePage("mood_details.html");
@@ -248,12 +248,12 @@ var init = function() {
 		{
 			if(activePage === 'home')
 			{
-				console.log("home");
+				//console.log("home");
 				tizen.application.getCurrentApplication().exit();
 			}
 			else 
 			{
-				console.log("here");
+				//console.log("here");
 				$.mobile.back();
 				//parent.history.back();
 			}
@@ -275,32 +275,12 @@ var init = function() {
 			}*/
         }
 	});
-	console.log("init() called");
 	
-	tizen.alarm.removeAll();
+	//var alarms = tizen.alarm.getAll();
+	//console.log(alarms.length + " alarms present in the storage.");
 	
-	//var alarm = new tizen.AlarmRelative(0.3*tizen.alarm.PERIOD_MINUTE);
-	//tizen.alarm.add(alarm, tizen.application.getCurrentApplication().appInfo.id, appControl);
-	
-	var alarms = tizen.alarm.getAll();
-	console.log(alarms.length + " alarms present in the storage.");
-	
-	
-	
-	
-	
-	/*try
-		tizen.notification.post(moodNotification);
-		var alarms = tizen.alarm.getAll();
-		
-		console.log(alarms.length + " alarms present in the storage.");
-	}
-    catch (e)
-    {
-        console.log("Exception: " + e);
-    }*/
-	console.log("storage: " + getMoodNotificationInterval());
-	console.log("moodNotificationInterval: " + getMoodNotificationInterval());	
+	//console.log("storage: " + getMoodNotificationInterval());
+	//console.log("moodNotificationInterval: " + getMoodNotificationInterval());	
 
 };
 
@@ -322,7 +302,28 @@ $(document).ready(function(){
 	}
 });*/
 
-
+function insertText () {
+	if(getMoodNotificationInterval() == 0)
+	{
+		document.getElementById('interval').innerHTML = "Never";
+	}
+	else if(getMoodNotificationInterval() == 1)
+	{
+		document.getElementById('interval').innerHTML = "Hourly";
+	}
+	else if(getMoodNotificationInterval() == 2)
+	{
+		document.getElementById('interval').innerHTML = "Every three hours";
+	}
+	else if(getMoodNotificationInterval() == 3)
+	{
+		document.getElementById('interval').innerHTML = "Twice daily";
+	}
+	else if(getMoodNotificationInterval() == 4)
+	{
+		document.getElementById('interval').innerHTML = "Daily";
+	}
+}
 
 //TODO: conditional init for welcome wizard
 $(document).delegate('#home', 'pagebeforecreate', function() {

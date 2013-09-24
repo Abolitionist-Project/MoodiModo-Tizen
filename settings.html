@@ -7,6 +7,9 @@
 <script src="tizen-web-ui-fw/latest/js/tizen-web-ui-fw-libs.js"></script>
 <script src="tizen-web-ui-fw/latest/js/tizen-web-ui-fw.js" data-framework-viewport-scale=“true” data-framework-theme="tizen-white"></script>
 <script type="text/javascript" src="./js/main.js"></script>
+<script>
+
+</script>
 <link rel="stylesheet" type="text/css" href="./css/style.css" />
 </head>
 <body>
@@ -26,30 +29,21 @@
 				<a id="askOption" data-transition="slide" href="settings_moodNotification.html"> 
 					Ask for your mood
 					
+					<span id="interval" class="ui-li-text-sub"></span>
+					<div data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" href="settings_moodNotification.html"></div>
 					<script>
-						if(getMoodNotificationInterval() == 0)
-						{
-							document.getElementById("askOption").innerHTML+="<span class=\"ui-li-text-sub\">Never</span>";
-						}
-						else if(getMoodNotificationInterval() == 1)
-						{
-							document.getElementById("askOption").innerHTML+="<span class=\"ui-li-text-sub\">Hourly</span>";
-						}
-						else if(getMoodNotificationInterval() == 2)
-						{
-							document.getElementById("askOption").innerHTML+="<span class=\"ui-li-text-sub\">Every three hours</span>";
-						}
-						else if(getMoodNotificationInterval() == 3)
-						{
-							document.getElementById("askOption").innerHTML+="<span class=\"ui-li-text-sub\">Twice daily</span>";
-						}
-						else if(getMoodNotificationInterval() == 4)
-						{
-							document.getElementById("askOption").innerHTML+="<span class=\"ui-li-text-sub\">Daily</span>";
-						}
+					insertText();
 					</script>
+					<!-- 
+					<div data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" style="vertical-align: bottom; float: right;"></div>
+					
+					<div data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" onclick="location.href='settings_moodNotification.html'"></div>
+					-->
 				</a>
-				<div data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" onclick="location.href='settings_moodNotification.html'"></div>
+				<!-- 
+				<a data-role="button" data-inline="true" data-icon="arrow-r" data-style="circle" href="settings_moodNotification.html"></a>
+				-->
+				
 			</li>
 		</ul>
 		
