@@ -135,7 +135,7 @@ moodiModoDB.indexedDB = {};
 moodiModoDB.indexedDB.db = null;
 
 $(document).bind('pageinit', function() {
-	console.log("-- lets start the party --");
+	//console.log("-- lets start the party --");
 	moodiModoDB.indexedDB.open();
 	$("#addItem").click(function() {
 		addMood();
@@ -150,7 +150,7 @@ moodiModoDB.indexedDB.open = function() {
 	var request = indexedDB.open(dbName, dbVersion);
 
 	request.onsuccess = function(e) {
-		console.log ("success our DB: " + dbName + " is open and ready for work");
+		//console.log ("success our DB: " + dbName + " is open and ready for work");
 		moodiModoDB.indexedDB.db = e.target.result;
 		moodiModoDB.indexedDB.getAllTodoItems();
 	}
@@ -158,7 +158,7 @@ moodiModoDB.indexedDB.open = function() {
 	request.onupgradeneeded = function(e) {
 		moodiModoDB.indexedDB.db = e.target.result;
 		var db = moodiModoDB.indexedDB.db;
-		console.log ("Going to upgrade our DB from version: "+ e.oldVersion + " to " + e.newVersion);
+		//console.log ("Going to upgrade our DB from version: "+ e.oldVersion + " to " + e.newVersion);
 
 		try {
 			if (db.objectStoreNames && db.objectStoreNames.contains("moodEntry")) {
@@ -170,7 +170,7 @@ moodiModoDB.indexedDB.open = function() {
 		}
 		var store = db.createObjectStore("moodEntry",{keyPath: "timestamp"});
 		//var authorIndex = store.createIndex("moodId", "moodId");
-		console.log("-- onupgradeneeded store:"+ JSON.stringify(store));
+		//console.log("-- onupgradeneeded store:"+ JSON.stringify(store));
 	}
 	
 	request.onfailure = function(e) {

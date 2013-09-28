@@ -106,13 +106,13 @@ var initCharts = function() {
 
 	initLineChart();
 	initBarChart();
-	console.log("charts loaded");
+	//console.log("charts loaded");
 }
 
-$(document).delegate('#home', 'pageshow', function() {
+$(document).bind('pagebeforeshow', '#home', function() {
 	console.log("charts pageshow");
 	//getBarChartData();
-	console.log("db manager barchart data to chart data");
+	//console.log("db manager barchart data to chart data");
 	getLineChartData();
 	//getMoodData();
 	getBarChartData();

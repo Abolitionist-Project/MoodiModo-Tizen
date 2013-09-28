@@ -37,15 +37,15 @@ var getCheckedValue = function(radioObj) {
 }
 
 function setCheckedValue(radioObj, newValue) {
-	console.log("setCheckedValue() called");
+	//console.log("setCheckedValue() called");
 
 	for(var i = 0; i < 5; i++) {
-		console.log("in for loop : " + i);
+		//console.log("in for loop : " + i);
 		if(radioObj[i].value == newValue.toString()) {
 			setMoodNotificationInterval(radioObj[i].value);
 			$("#radio-" + i).prop("checked", true).checkboxradio("refresh");
-			console.log("checkedRadio: " + radioObj[i].value);
-			console.log("moodNotificationInterval: " + getMoodNotificationInterval());
+			//console.log("checkedRadio: " + radioObj[i].value);
+			//console.log("moodNotificationInterval: " + getMoodNotificationInterval());
 			//localStorage.s
 		}
 		else 
@@ -53,7 +53,7 @@ function setCheckedValue(radioObj, newValue) {
 			$("#radio-" + i).prop("checked", false).checkboxradio("refresh");
 		}
 	}
-	console.log("end");
+	//console.log("end");
 }
 
 //-------MoodNotification interval-------//
@@ -77,31 +77,31 @@ function setMoodNotificationInterval(value)
 }
 
 $(document).delegate('#settings_moodNotification', 'pageshow', function() {
-	console.log("settings moodnotifi pageshow called");
+	//console.log("settings moodnotifi pageshow called");
 	setCheckedValue(document.forms['notificationOptionsForm'].elements['notificationOption'], getMoodNotificationInterval());
 });
 
 function fillHistory()
 {
 	//getMoodData();
-	console.log("mooddata length: " + historyData.length);
+	//console.log("mooddata length: " + historyData.length);
 
 	for(var i = 0; i < historyData.length; i++)
 	{
-		console.log("in for");
+		//console.log("in for");
 		addElementToHistory(historyData[i], i);
 	}
 }
 
 function addElementToHistory(mood, i)
 {
-	console.log("adding element: " + mood.timestamp);
+	//console.log("adding element: " + mood.timestamp);
 	var moodName;
 	var moodDate = parseInt(mood.timestamp*1000, 10);
-	console.log("mooddate: " + moodDate);
+	//console.log("mooddate: " + moodDate);
 	var date = new Date(moodDate);
 
-	console.log("found moodId: " + mood.moodId);
+	//console.log("found moodId: " + mood.moodId);
 	var dateString = dateToDMYHMS(date);
 	var moodName = new Array(5);
 	moodName[0]="Suicidal";

@@ -35,9 +35,8 @@ var RATING_INSPIRED = 21;
 
 var averageMood;
 
-function moodEntry(answers) {
-	
-	console.log("rating mood object: " + answers[RATING_MOOD]);
+function moodEntry(answers) 
+{
 	this.moodId = answers[RATING_MOOD];
     this.accurateMood = answers[RATING_ACCURATE_MOOD];
     this.guilty = ((answers[RATING_GUILTY] != -1) ? answers[RATING_GUILTY] : -1);
@@ -75,113 +74,91 @@ function resetQuestionAnswers()
 
 function setMoodId(moodId)
 {
-	console.log("rating mood setting: " + moodId);
 	questionAnswers[RATING_MOOD] = parseInt(moodId, 10);
 	questionAnswers[RATING_ACCURATE_MOOD] = parseInt(((moodId / 5) * 100), 10);
 }
 function setAccurateMood(accurateMood)
 {
-	console.log("accurate mood: " + accurateMood);
 	questionAnswers[RATING_ACCURATE_MOOD] = accurateMood;
 }
 function setGuilty(guilty)
 {
-	console.log("rating rating: " + guilty);
 	questionAnswers[RATING_GUILTY] = guilty;
 }
 function setAlert(alert)
 {
-	console.log("rating alert: " + alert);
 	questionAnswers[RATING_ALERT] = alert;
 }
 function setAfraid(afraid)
 {
-	console.log("rating afraid: " + afraid);
 	questionAnswers[RATING_AFRAID] = afraid;
 }
 function setExcited(excited)
 {
-	console.log("rating excited: " + excited);
 	questionAnswers[RATING_EXCITED] = excited;
 }
 function setIrritable(irritable)
 {
-	console.log("rating irritable: " + irritable);
 	questionAnswers[RATING_IRRITABLE] = irritable;
 }
 function setAshamed(ashamed)
 {
-	console.log("rating ashamed: " + ashamed);
 	questionAnswers[RATING_ASHAMED] = ashamed;
 }
 function setAttentive(attentive)
 {
-	console.log("rating attentive: " + attentive);
 	questionAnswers[RATING_ATTENTIVE] = attentive;
 }
 function setHostile(hostile)
 {
-	console.log("rating hostile: " + hostile);
 	questionAnswers[RATING_HOSTILE] = hostile;
 }
 function setActive(active)
 {
-	console.log("rating active: " + active);
 	questionAnswers[RATING_ACTIVE] = active;
 }
 function setNervous(nervous)
 {
-	console.log("rating nervous: " + nervous);
 	questionAnswers[RATING_NERVOUS] = nervous;
 }
 function setInterested(interested)
 {
-	console.log("rating interested: " + interested);
 	questionAnswers[RATING_INTERESTED] = interested;
 }
 function setEnthusiastic(enthusiastic)
 {
-	console.log("rating enthusiastic: " + enthusiastic);
 	questionAnswers[RATING_ENTHUSIASTIC] = enthusiastic;
 }
 function setJittery(jittery)
 {
-	console.log("rating jittery: " + jittery);
 	questionAnswers[RATING_JITTERY] = jittery;
 }
 function setStrong(strong)
 {
-	console.log("rating strong: " + strong);
 	questionAnswers[RATING_STRONG] = strong;
 }
 function setDistressed(distressed)
 {
-	console.log("rating distressed: " + distressed);
 	questionAnswers[RATING_DISTRESSED] = distressed;
 }
 function setDetermined(determined)
 {
-	console.log("rating determined: " + determined);
 	questionAnswers[RATING_DETERMINED] = determined;
 }
 function setUpset(upset)
 {
-	console.log("rating upset: " + upset);
 	questionAnswers[RATING_UPSET] = upset;
 }
 function setProud(proud)
 {
-	console.log("rating proud: " + proud);
 	questionAnswers[RATING_PROUD] = proud;
 }
 function setScared(scared)
 {
-	console.log("rating scared: " + scared);
 	questionAnswers[RATING_SCARED] = scared;
 }
 function setInspired(inspired)
 {
-	console.log("rating inspired: " + inspired);
 	questionAnswers[RATING_INSPIRED] = inspired;
 }
 

@@ -29,7 +29,7 @@ function setMoodAlarm()
 		{
 			if(localStorage.getItem("moodAlarmId") != "null" && localStorage.getItem("moodAlarmId") != null && localStorage.getItem("moodAlarmId") != "")
 			{
-				console.log("moodAlarmId in local storage: " + localStorage.getItem("moodAlarmId"));
+				//console.log("moodAlarmId in local storage: " + localStorage.getItem("moodAlarmId"));
 				//tizen.alarm.remove(localStorage.getItem("moodAlarmId"));
 				tizen.alarm.removeAll();
 			}
@@ -50,7 +50,7 @@ function setMoodAlarm()
 			
 			if(localStorage.getItem("moodAlarmId") != "null" && localStorage.getItem("moodAlarmId") != null && localStorage.getItem("moodAlarmId") != "")
 			{
-				console.log("moodAlarmId in local storage: " + localStorage.getItem("moodAlarmId"));
+				//console.log("moodAlarmId in local storage: " + localStorage.getItem("moodAlarmId"));
 				tizen.alarm.removeAll();
 				//tizen.alarm.remove(localStorage.getItem("moodAlarmId"));
 				localStorage.setItem("moodAlarmId", alarmHourly.id);
@@ -75,7 +75,7 @@ function setMoodAlarm()
 			
 			if(localStorage.getItem("moodAlarmId") != "null" && localStorage.getItem("moodAlarmId") != null && localStorage.getItem("moodAlarmId") != "")
 			{
-				console.log("moodAlarmId in local storage: " + localStorage.getItem("moodAlarmId"));
+				//console.log("moodAlarmId in local storage: " + localStorage.getItem("moodAlarmId"));
 				tizen.alarm.removeAll();
 				//tizen.alarm.remove(localStorage.getItem("moodAlarmId"));
 				localStorage.setItem("moodAlarmId", alarm3Hourly.id);
@@ -102,7 +102,7 @@ function setMoodAlarm()
 			
 			if(localStorage.getItem("moodAlarmId") != "null" && localStorage.getItem("moodAlarmId") != null && localStorage.getItem("moodAlarmId") != "")
 			{
-				console.log("moodAlarmId in local storage: " + localStorage.getItem("moodAlarmId"));
+				//console.log("moodAlarmId in local storage: " + localStorage.getItem("moodAlarmId"));
 				tizen.alarm.removeAll();
 				//tizen.alarm.remove(localStorage.getItem("moodAlarmId"));
 				localStorage.setItem("moodAlarmId", alarmTwiceDaily.id);
@@ -127,11 +127,11 @@ function setMoodAlarm()
 			var alarmDaily = new tizen.AlarmRelative(tizen.alarm.PERIOD_DAY, tizen.alarm.PERIOD_DAY);
 			tizen.alarm.add(alarmDaily, tizen.application.getCurrentApplication().appInfo.id, appControl);
 			
-			console.log("alarm added with id: " + alarmDaily.id);
+			//console.log("alarm added with id: " + alarmDaily.id);
 
 			if(localStorage.getItem("moodAlarmId") != "null" && localStorage.getItem("moodAlarmId") != null && localStorage.getItem("moodAlarmId") != "")
 			{
-				console.log("moodAlarmId in local storage: " + localStorage.getItem("moodAlarmId"));
+				//console.log("moodAlarmId in local storage: " + localStorage.getItem("moodAlarmId"));
 				tizen.alarm.removeAll();
 				//tizen.alarm.remove(localStorage.getItem("moodAlarmId"));
 				localStorage.setItem("moodAlarmId", alarmDaily.id);
