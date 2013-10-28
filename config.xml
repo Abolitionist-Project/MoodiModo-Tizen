@@ -4,7 +4,7 @@
         <tizen:src name="report_mood.html"/>
         <tizen:operation name="http://tizen.org/appcontrol/operation/report_mood"/>
     </tizen:app-control>
-    <tizen:application id="bELa1lU4il.MoodiModo" package="bELa1lU4il" required_version="1.0"/>
+    <tizen:application id="bELa1lU4il.MoodiModo" package="bELa1lU4il" required_version="2.2"/>
     <content src="index.html"/>
     <feature name="http://tizen.org/api/alarm" required="true"/>
     <feature name="http://tizen.org/api/alarm.read" required="true"/>
