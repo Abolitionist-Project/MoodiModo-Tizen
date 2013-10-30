@@ -2,5 +2,5 @@
 #add
 #modify
 res/wgt/author-signature.xml
-res/wgt/js/charts.js
+res/wgt/js/indexedDB.js
 res/wgt/signature1.xml

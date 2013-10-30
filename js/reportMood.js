@@ -59,6 +59,7 @@ function moodEntry(answers)
     this.proud = ((answers[RATING_PROUD] != -1) ? answers[RATING_PROUD] : -1);
     this.scared = ((answers[RATING_SCARED] != -1) ? answers[RATING_SCARED] : -1);
     this.inspired = ((answers[RATING_INSPIRED] != -1) ? answers[RATING_INSPIRED] : -1);
+    this.timestamp = new Date().getTime() / 1000;
     
 };
 

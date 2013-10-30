@@ -7,7 +7,8 @@ var barChartData = [];
 
 //------------init linechart-------------//
 var initLineChart = function() {
-	$('#LineContainer').highcharts({
+	lineChart = new Highcharts.Chart({
+	//$('#LineContainer').highcharts({
 		chart : {
 			borderWidth : 2,
 			backgroundColor : '#EFEDE5',
@@ -17,7 +18,8 @@ var initLineChart = function() {
 			margin : [ 0, 0, 0, 0 ],
 			spacingBottom : 0,
 			spacingLeft : 0,
-			spacingRight : 0
+			spacingRight : 0,
+			renderTo: 'LineContainer'
 		},
 		title : {
 			text : ''
@@ -44,6 +46,8 @@ var initLineChart = function() {
 			data : lineChartData
 		} ]
 	});
+	
+	
 }
 
 
@@ -59,14 +63,16 @@ var initBarChart = function() {
 	barChartData[3] = barData[6];
 	barChartData[4] = barData[8];
 	console.log("barChartData after setting 2: " + data);*/
-	
-	$('#BarContainer').highcharts({
+
+	barChart = new Highcharts.Chart({
+	//$('#BarContainer').highcharts({
 		chart : {
 			borderWidth : 2,
 			backgroundColor : '#EFEDE5',
 			borderColor : '#DEDCD5',
 			height : 400,
-			type : 'column'
+			type : 'column',
+			renderTo : 'BarContainer'
 		},
 		title : {
 			text : ''
@@ -110,11 +116,11 @@ var initCharts = function() {
 }
 
 $(document).bind('pagebeforeshow', '#home', function() {
-	console.log("charts pageshow");
 	//getBarChartData();
 	//console.log("db manager barchart data to chart data");
-	getLineChartData();
+	//initLineChartData();
+	initMoodData();
 	//getMoodData();
-	getBarChartData();
+	//initBarChartData();
 	initCharts();
 });

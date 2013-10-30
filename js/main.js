@@ -85,10 +85,9 @@ function fillHistory()
 {
 	//getMoodData();
 	//console.log("mooddata length: " + historyData.length);
-
+	
 	for(var i = 0; i < historyData.length; i++)
 	{
-		//console.log("in for");
 		addElementToHistory(historyData[i], i);
 	}
 }
@@ -98,7 +97,6 @@ function addElementToHistory(mood, i)
 	//console.log("adding element: " + mood.timestamp);
 	var moodName;
 	var moodDate = parseInt(mood.timestamp*1000, 10);
-	//console.log("mooddate: " + moodDate);
 	var date = new Date(moodDate);
 
 	//console.log("found moodId: " + mood.moodId);
@@ -111,8 +109,14 @@ function addElementToHistory(mood, i)
 	moodName[4]="Ecstatic";
 	
 	moodName = moodName[mood.moodId];
-	$('#historyList').append("<li id='" + i + "' class='ui-li-has-multiline'><a href='mood_details.html' onclick='moodiModoDB.indexedDB.getTodoItem( " + mood.timestamp + ")'>" +
-			moodName + "<span class='ui-li-text-sub'>" + dateString + "</span></div></a></li>");
+	newMood = historyList[i];
+	$('#historyList').append("<li id='1' class='ui-li-has-multiline'>" +  //<a href='mood_details.html' onclick='saveDetailedMood(" + newMood + ")'>" +
+			moodName + "<span class='ui-li-text-sub'>" + dateString + "</span></div></li>"); //</a></li>");
+}
+
+function saveDetailedMood(newDetailedMood)
+{
+	detailedMood = newDetailedMood;
 }
 
 function addElementToMoodDetails(moodId, name)
@@ -154,10 +158,6 @@ function capitalize(s)
 
 function showMoodDetails(moodEntry)
 {
-	//TODO Get moodEntry from DB
-	//TODO Loop through all columns and get values
-	//TODO show values by adding them to the page like below\/\/
-
 	var x;
 	var text = "";
 	for(x in moodEntry)
@@ -275,6 +275,8 @@ var init = function() {
 			}*/
         }
 	});
+
+
 	
 	//var alarms = tizen.alarm.getAll();
 	//console.log(alarms.length + " alarms present in the storage.");
@@ -325,6 +327,78 @@ function insertText () {
 	}
 }
 
+function getIsLoggedIn()
+{
+	if(localStorage.getItem("QMCookie") != null)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+function insertQMSupportText() {
+	if(getIsLoggedIn() == true || getIsLoggedIn() == "true")
+	{
+		document.getElementById('QMSyncEnabled').innerHTML = "Enabled";
+	}
+	else if(getIsLoggedIn() == false || getIsLoggedIn() == "false")
+	{
+		document.getElementById('QMSyncEnabled').innerHTML = "Disabled";
+	}
+}
+
+function openBrowser(action)
+{
+	var url = "";
+	if(action == "site")
+	{
+		url = "https://quantimo.do"
+	}
+	else if(action == "register")
+	{
+		url = "https://quantimo.do/wp-login.php/action=register"
+	}
+	var appControl = new tizen.ApplicationControl("http://tizen.org/appcontrol/operation/view",url);
+
+	tizen.application.launchAppControl(appControl, null, function(){console.log("launch appControl succeeded");},function(e){console.log("launch appControl failed. Reason: " + e.name);} );
+}
+
+function QMLogin(form)
+{
+	var username = form.uname.value;
+	var pass = form.pswrd.value;
+	
+	//Handle login
+	jQuery.ajax(
+			{
+				type: 'POST', 
+				url: 'https://quantimodo.com/login.php/', 
+				contentType: 'application/json', 
+				data: [{'log':username,'pwd':pass}], 
+				dataType: 'json', 
+				success: function(json) {
+					console.log(json);
+					//requestArray[id] = json;
+				},
+				error: function(json) {
+					console.log(json);
+				}
+			});
+	/*if(form.uname.value == "myuserid" && form.pswrd.value == "mypswrd")
+	{
+		console.log("valid login");
+		//window.open('target.html') //opens the target page while Id & password matches
+	}
+	else
+	{
+		console.log("invalid login");
+	}
+	*/
+}
+
 //TODO: conditional init for welcome wizard
 $(document).delegate('#home', 'pagebeforecreate', function() {
 	var firstStartup = localStorage.getItem("firstStartup");
@@ -352,6 +426,13 @@ $(document).delegate('#history', 'pagecreate', function() {
 	//fillHistory();
 });
 
+$(document).delegate('#home', 'pageshow', function()
+{
+	lineChart.series[0].setData(lineChartData);
+	barChart.series[0].setData(barChartData);
+	//window.location.reload()
+});
+
 $(document).delegate('#history', 'pageshow', function() {
 	historyData = moodData;
 	$("#historyList").empty();
@@ -360,7 +441,6 @@ $(document).delegate('#history', 'pageshow', function() {
 });
 
 $(document).delegate('#mood_details', 'pageshow', function() {
-
 	$("#moodDetails").empty();
 	showMoodDetails(detailedMood);
 	$('#moodDetails').listview('refresh');

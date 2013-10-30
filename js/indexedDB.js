@@ -1,6 +1,5 @@
 
 var moodData = new Array();
-var detailedMood;
 /*
 window.indexedDB = window.webkitIndexedDB;
 
@@ -65,7 +64,7 @@ indexedDB.addMood = function(moodId) {
 
 	var data = {
 			"moodId": moodId, // todoText should be visible here
-			"timeStamp": new Date().getTime()
+			"timestamp": new Date().getTime()
 	};
 
 	var request = store.put(data);
@@ -122,9 +121,9 @@ function getAllMoods() {
 
 
 var dbName = "MoodiModoDB";
-var dbVersion = 4;
+var dbVersion = 6;
 var moodiModoDB = {};
-var indexedDB = window.webkitIndexedDB
+var indexedDB = window.webkitIndexedDB;
 
 if ('webkitIndexedDB' in window) {
 	// window.IDBTransaction = window.webkitIDBTransaction;
@@ -148,16 +147,16 @@ moodiModoDB.indexedDB.onerror = function(e) {
 
 moodiModoDB.indexedDB.open = function() {
 	var request = indexedDB.open(dbName, dbVersion);
-
+	
 	request.onsuccess = function(e) {
 		//console.log ("success our DB: " + dbName + " is open and ready for work");
-		moodiModoDB.indexedDB.db = e.target.result;
-		moodiModoDB.indexedDB.getAllTodoItems();
+		var moodiModoDB = e.target.result;
+		return e.target.result;
 	}
 
 	request.onupgradeneeded = function(e) {
-		moodiModoDB.indexedDB.db = e.target.result;
-		var db = moodiModoDB.indexedDB.db;
+		var moodiModoDB = e.target.result;
+		var db = moodiModoDB;
 		//console.log ("Going to upgrade our DB from version: "+ e.oldVersion + " to " + e.newVersion);
 
 		try {
@@ -183,131 +182,152 @@ moodiModoDB.indexedDB.open = function() {
 };
 
 moodiModoDB.indexedDB.addMood = function(moodResult) {
-	var db = moodiModoDB.indexedDB.db;
-	var trans = moodiModoDB.indexedDB.db.transaction("moodEntry", "readwrite");
-	var store = trans.objectStore("moodEntry");
-
-	var data = {
-			"timestamp": new Date().getTime() / 1000,
-			"moodId": parseInt(moodResult.moodId, 10),
-			"accurateMood": parseInt(moodResult.accurateMood, 10),
-			"guilty": parseInt(moodResult.guilty, 10),
-			"alert": parseInt(moodResult.alert, 10),
-			"afraid": parseInt(moodResult.afraid, 10),
-			"excited": parseInt(moodResult.excited, 10),
-			"irritable": parseInt(moodResult.irritable, 10),
-			"ashamed": parseInt(moodResult.ashamed, 10),
-			"attentive": parseInt(moodResult.attentive, 10),
-			"hostile": parseInt(moodResult.hostile, 10),
-			"active": parseInt(moodResult.active, 10),
-			"nervous": parseInt(moodResult.nervous, 10),
-			"interested": parseInt(moodResult.interested, 10),
-			"enthusiastic": parseInt(moodResult.enthusiastic, 10),
-			"jittery": parseInt(moodResult.jittery, 10),
-			"strong": parseInt(moodResult.strong, 10),
-			"distressed": parseInt(moodResult.distressed, 10),
-			"determined": parseInt(moodResult.determined, 10),
-			"upset": parseInt(moodResult.upset, 10),
-			"proud": parseInt(moodResult.proud, 10),
-			"scared": parseInt(moodResult.scared, 10),
-			"inspired": parseInt(moodResult.inspired, 10)
-	};
-
-	var request = store.put(data);
-
+	moodData.push(moodResult);
+	var newMoodData = moodData[moodData.length-1];
+	
+	var request = indexedDB.open(dbName, dbVersion);
+	
 	request.onsuccess = function(e) {
-		moodiModoDB.indexedDB.getAllTodoItems();
-	};
+		//console.log ("success our DB: " + dbName + " is open and ready for work");
+		var db = e.target.result;
+		
+		//var db = moodiModoDB.indexedDB.db;
+		var trans = db.transaction("moodEntry", "readwrite");
+		var store = trans.objectStore("moodEntry");
+		//var timestamp = new Date().getTime() / 1000;
+		//console.log("timestamp: " + timestamp);
+		var data = {
+				"moodId": parseInt(moodResult.moodId, 10),
+				"accurateMood": parseInt(moodResult.accurateMood, 10),
+				"guilty": parseInt(moodResult.guilty, 10),
+				"alert": parseInt(moodResult.alert, 10),
+				"afraid": parseInt(moodResult.afraid, 10),
+				"excited": parseInt(moodResult.excited, 10),
+				"irritable": parseInt(moodResult.irritable, 10),
+				"ashamed": parseInt(moodResult.ashamed, 10),
+				"attentive": parseInt(moodResult.attentive, 10),
+				"hostile": parseInt(moodResult.hostile, 10),
+				"active": parseInt(moodResult.active, 10),
+				"nervous": parseInt(moodResult.nervous, 10),
+				"interested": parseInt(moodResult.interested, 10),
+				"enthusiastic": parseInt(moodResult.enthusiastic, 10),
+				"jittery": parseInt(moodResult.jittery, 10),
+				"strong": parseInt(moodResult.strong, 10),
+				"distressed": parseInt(moodResult.distressed, 10),
+				"determined": parseInt(moodResult.determined, 10),
+				"upset": parseInt(moodResult.upset, 10),
+				"proud": parseInt(moodResult.proud, 10),
+				"scared": parseInt(moodResult.scared, 10),
+				"inspired": parseInt(moodResult.inspired, 10),
+				"timestamp": parseInt(moodResult.timestamp, 10)
+		};
 
-	request.onerror = function(e) {
-		console.error("Error Adding an item: ", e);
-	};
+		var request2 = store.put(data);
+	
+		request2.onsuccess = function(e) {
+			moodiModoDB.indexedDB.getAllTodoItems();
+		};
+	
+		request2.onerror = function(e) {
+			console.error("Error Adding an item: ", e);
+			moodData.pop(moodResult);
+			//TODO: Show message to user
+		};
+	}
+	request.onerror = function () {
+	    console.log("Oopsie!");
+	}
 };
+
+/*moodiModoDB.indexedDB.getTodoItem = function(timestamp) {
+	//var todos = document.getElementById("todoItems");
+	//todos.innerHTML = "";
+	console.log("getting timestamp: " + timestamp);
+	var request = indexedDB.open(dbName, dbVersion);
+	
+	request.onsuccess = function(e) {
+		//console.log ("success our DB: " + dbName + " is open and ready for work");
+		var db = e.target.result;
+		//var db = moodiModoDB.indexedDB.db;
+		var trans = db.transaction("moodEntry", "readonly");
+		var store = trans.objectStore("moodEntry");
+		
+		var request2 = store.get(timestamp);
+		request2.onerror = function(event) {
+		  // Handle errors!
+		};
+		request2.onsuccess = function(e) {
+			// Do something with the request.result!
+			//alert("MoodId for timestamp is " + request.result.moodId);
+			//localStorage.setItem("detailedMood", request.result);
+			//showMoodDetails(request.result);
+			var result = request2.result;
+			console.log("request result detailed mood: " + result);
+			detailedMood = result;
+		};
+	
+		//var request = store.get(timestamp);
+		//showMoodDetails(request);
+	
+		//request.onsuccess = function(e) {
+	
+		//	console.log("g: ", request.result);
+		//	showMoodDetails(request.result);
+		//};
+	
+		//request.onerror = moodiModoDB.indexedDB.onerror;
+	}
+	request.onerror = function () {
+	    console.log("Oppsie!");
+	}
+};
+*/
 
 function renderTodo(i, row) {
 
     moodData[i] = row;
-    // And lets create the new il item with its markup
-    $("#todoItems").trigger('create'); 
-  }
-
-moodiModoDB.indexedDB.deleteTodo = function(id) {
-	var db = moodiModoDB.indexedDB.db;
-	var trans = db.transaction("moodEntry", "readwrite");
-	var store = trans.objectStore("moodEntry");
-
-	var request = store.delete(id);
-
-	request.onsuccess = function(e) {
-		moodiModoDB.indexedDB.getAllTodoItems();
-	};
-
-	request.onerror = function(e) {
-		console.error("Error deleteing: ", e);
-	};j
-};
+}
 
 moodiModoDB.indexedDB.getAllTodoItems = function() {
 	//var todos = document.getElementById("todoItems");
 	//todos.innerHTML = "";
 
-	var db = moodiModoDB.indexedDB.db;
-	var trans = db.transaction("moodEntry", "readonly");
-	var store = trans.objectStore("moodEntry");
-
-	// Get everything in the store;
-	var keyRange = IDBKeyRange.lowerBound(0);
-	var cursorRequest = store.openCursor(keyRange);
-
-	var i = 0;
+	var request = indexedDB.open(dbName, dbVersion);
 	
-	cursorRequest.onsuccess = function(e) {
-		var result = e.target.result;
-		if(!!result == false)
-			return;
-
-		renderTodo(i, result.value);
-		i++;
-		result.continue();
-	};
-
-	cursorRequest.onerror = moodiModoDB.indexedDB.onerror;
-};
-
-moodiModoDB.indexedDB.getTodoItem = function(timeStamp) {
-	//var todos = document.getElementById("todoItems");
-	//todos.innerHTML = "";
-
-	var db = moodiModoDB.indexedDB.db;
-	var trans = db.transaction("moodEntry", "readonly");
-	var store = trans.objectStore("moodEntry");
-	
-	var request = store.get(timeStamp);
-	request.onerror = function(event) {
-	  // Handle errors!
-	};
-	request.onsuccess = function(event) {
-		// Do something with the request.result!
-		//alert("MoodId for timestamp is " + request.result.moodId);
-		//localStorage.setItem("detailedMood", request.result);
-		//showMoodDetails(request.result);
-		detailedMood = request.result;
-	};
-	
-	/*var request = store.get(timeStamp);
-	//showMoodDetails(request);
-
 	request.onsuccess = function(e) {
-
-		console.log("g: ", request.result);
-		showMoodDetails(request.result);
-	};
-
-	request.onerror = moodiModoDB.indexedDB.onerror;*/
+		//console.log ("success our DB: " + dbName + " is open and ready for work");
+		var db = e.target.result;
+		
+		
+		//var db = moodiModoDB.indexedDB.open();
+		var trans = db.transaction("moodEntry", "readonly");
+		var store = trans.objectStore("moodEntry");
+	
+		// Get everything in the store;
+		var keyRange = IDBKeyRange.lowerBound(0);
+		var cursorRequest = store.openCursor(keyRange);
+	
+		var i = 0;
+		
+		cursorRequest.onsuccess = function(e) {
+			var result = e.result;
+			if(!!result == false)
+				return;
+			
+			moodData[i] = result;
+			i++;
+			result.continue();
+		};
+	
+		cursorRequest.onerror = moodiModoDB.indexedDB.onerror;
+	}
+	request.onerror = function () {
+	    console.log("Oopsie!");
+	}
 };
 
 
-function getBarChartData()
+function initBarChartData()
 {
 	var sui=0;
 	var sad=0;
@@ -349,7 +369,7 @@ function getBarChartData()
     barChartData[4] = parseInt(ecs, 10);
 }
 
-function getLineChartData()
+function initLineChartData()
 {
 	var mood;
     var moodsNumber = moodData.length;
@@ -379,19 +399,29 @@ function getLineChartData()
     }
 }
 
+function initMoodData()
+{
+	if(moodData.length == 0)
+	{
+		moodiModoDB.indexedDB.getAllTodoItems();
+	}
+	initLineChartData();
+	initBarChartData();
+}
+
 function saveMood(moodId, manually)
 {
-	if(manually == "true" || manually == true)
-	{
+	//if(manually == "true" || manually == true)
+	//{
 		setMoodId(moodId);
 		var moodEntry1 = new moodEntry(questionAnswers);
 		moodiModoDB.indexedDB.addMood(moodEntry1);
 		
+		
 		//moodiModoDB.indexedDB.addMood(moodId);
 		//console.log("new mood stored with timestamp: " + timestamp + " and moodId: " + moodId);
 		//alert("Your reported mood has been saved.");
-		parent.history.back();
-	}
+	/*}
 	else if(manually == "false" || manually == false)
 	{
 		setMoodId(moodId);
@@ -399,7 +429,6 @@ function saveMood(moodId, manually)
 		moodiModoDB.indexedDB.addMood(moodEntry2);
 		//moodiModoDB.indexedDB.addMood(moodId);
 		//console.log("new mood stored with timestamp: " + timestamp + " and moodId: " + mood);
-		tizen.application.getCurrentApplication().exit();
 	}
 	else
 	{
@@ -408,6 +437,17 @@ function saveMood(moodId, manually)
 		moodiModoDB.indexedDB.addMood(moodEntry3);
 		//localStorage.setItem("firstMood", moodId);
 		//moodiModoDB.indexedDB.addMood(moodId);
+	}*/
+	if(manually == "true" || manually == true)
+	{
+		parent.history.back();
+	}
+	else if(manually == "false" || manually == false)
+	{
+		tizen.application.getCurrentApplication().exit();
+	}
+	else
+	{
 		localStorage.setItem("firstStartup", false);
 	}
 }
