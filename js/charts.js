@@ -109,7 +109,6 @@ var initBarChart = function() {
 //--------------init charts--------------//
 
 var initCharts = function() {
-
 	initLineChart();
 	initBarChart();
 	//console.log("charts loaded");
