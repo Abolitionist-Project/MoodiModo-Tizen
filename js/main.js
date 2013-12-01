@@ -206,7 +206,7 @@ function welcomeWizardCompleted() {
 	//saveMood(localStorage.getItem("firstMood"));
 
 	//console.log("first mood stored with timestamp: " + timestamp + " and moodId: " + localStorage.getItem("firstMood"));
-	//localStorage.setItem("firstStartup", false);
+	localStorage.setItem("firstStartup", false);
 	//localStorage.removeItem("firstMood");
 }
 
@@ -277,6 +277,8 @@ var init = function() {
 	});
 
 
+	//var alarm = new tizen.AlarmRelative(30, 3 * tizen.alarm.PERIOD_HOUR);
+	//tizen.alarm.add(alarm, tizen.application.getCurrentApplication().appInfo.id, appControl);
 	
 	//var alarms = tizen.alarm.getAll();
 	//console.log(alarms.length + " alarms present in the storage.");

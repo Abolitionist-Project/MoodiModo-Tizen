@@ -121,7 +121,7 @@ function getAllMoods() {
 
 
 var dbName = "MoodiModoDB";
-var dbVersion = 6;
+//var dbVersion = 6;
 var moodiModoDB = {};
 var indexedDB = window.webkitIndexedDB;
 
@@ -146,7 +146,7 @@ moodiModoDB.indexedDB.onerror = function(e) {
 };
 
 moodiModoDB.indexedDB.open = function() {
-	var request = indexedDB.open(dbName, dbVersion);
+	var request = indexedDB.open(dbName);
 	
 	request.onsuccess = function(e) {
 		//console.log ("success our DB: " + dbName + " is open and ready for work");
@@ -185,7 +185,7 @@ moodiModoDB.indexedDB.addMood = function(moodResult) {
 	moodData.push(moodResult);
 	var newMoodData = moodData[moodData.length-1];
 	
-	var request = indexedDB.open(dbName, dbVersion);
+	var request = indexedDB.open(dbName);
 	
 	request.onsuccess = function(e) {
 		//console.log ("success our DB: " + dbName + " is open and ready for work");
@@ -292,7 +292,7 @@ moodiModoDB.indexedDB.getAllTodoItems = function() {
 	//var todos = document.getElementById("todoItems");
 	//todos.innerHTML = "";
 
-	var request = indexedDB.open(dbName, dbVersion);
+	var request = indexedDB.open(dbName);
 	
 	request.onsuccess = function(e) {
 		//console.log ("success our DB: " + dbName + " is open and ready for work");
@@ -411,33 +411,10 @@ function initMoodData()
 
 function saveMood(moodId, manually)
 {
-	//if(manually == "true" || manually == true)
-	//{
-		setMoodId(moodId);
-		var moodEntry1 = new moodEntry(questionAnswers);
-		moodiModoDB.indexedDB.addMood(moodEntry1);
-		
-		
-		//moodiModoDB.indexedDB.addMood(moodId);
-		//console.log("new mood stored with timestamp: " + timestamp + " and moodId: " + moodId);
-		//alert("Your reported mood has been saved.");
-	/*}
-	else if(manually == "false" || manually == false)
-	{
-		setMoodId(moodId);
-		var moodEntry2 = new moodEntry(questionAnswers);
-		moodiModoDB.indexedDB.addMood(moodEntry2);
-		//moodiModoDB.indexedDB.addMood(moodId);
-		//console.log("new mood stored with timestamp: " + timestamp + " and moodId: " + mood);
-	}
-	else
-	{
-		setMoodId(moodId);
-		var moodEntry3 = new moodEntry(questionAnswers);
-		moodiModoDB.indexedDB.addMood(moodEntry3);
-		//localStorage.setItem("firstMood", moodId);
-		//moodiModoDB.indexedDB.addMood(moodId);
-	}*/
+	setMoodId(moodId);
+	var moodEntry1 = new moodEntry(questionAnswers);
+	moodiModoDB.indexedDB.addMood(moodEntry1);
+
 	if(manually == "true" || manually == true)
 	{
 		parent.history.back();
@@ -445,9 +422,5 @@ function saveMood(moodId, manually)
 	else if(manually == "false" || manually == false)
 	{
 		tizen.application.getCurrentApplication().exit();
-	}
-	else
-	{
-		localStorage.setItem("firstStartup", false);
 	}
 }
