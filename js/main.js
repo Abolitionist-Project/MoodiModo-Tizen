@@ -34,7 +34,7 @@ var getCheckedValue = function(radioObj) {
 		}
 	}
 	return "";
-}
+};
 
 function setCheckedValue(radioObj, newValue) {
 	//console.log("setCheckedValue() called");
@@ -54,6 +54,12 @@ function setCheckedValue(radioObj, newValue) {
 }
 
 //-------MoodNotification interval-------//
+function setMoodNotificationInterval(value)
+{
+	localStorage.setItem("moodNotificationInterval", value);
+	setMoodAlarm();
+}
+
 function getMoodNotificationInterval()
 {
 	if(localStorage.getItem("moodNotificationInterval") != null)
@@ -67,10 +73,30 @@ function getMoodNotificationInterval()
 	}
 }
 
-function setMoodNotificationInterval(value)
+function capitalize(s)
 {
-	localStorage.setItem("moodNotificationInterval", value);
-	setMoodAlarm();
+    return s[0].toUpperCase() + s.slice(1);
+}
+
+function dateToDMYHMS(date) {
+	var weekday=new Array(7);
+	weekday[0]="Sunday";
+	weekday[1]="Monday";
+	weekday[2]="Tuesday";
+	weekday[3]="Wednesday";
+	weekday[4]="Thursday";
+	weekday[5]="Friday";
+	weekday[6]="Saturday";
+	
+	function pad(n){return n<10 ? '0'+n : n};
+	
+	var dayName = weekday[date.getDay()];
+	var hour = pad(date.getHours());
+	var minutes = pad(date.getMinutes());
+	var seconds = pad(date.getSeconds());
+
+	return dayName + ", " + date.toLocaleDateString() + " " + hour + ":" + minutes + ':' + seconds;
+	
 }
 
 $(document).delegate('#settings_moodNotification', 'pageshow', function() {
@@ -78,16 +104,6 @@ $(document).delegate('#settings_moodNotification', 'pageshow', function() {
 	setCheckedValue(document.forms['notificationOptionsForm'].elements['notificationOption'], getMoodNotificationInterval());
 });
 
-function fillHistory()
-{
-	//getMoodData();
-	//console.log("mooddata length: " + historyData.length);
-	
-	for(var i = 0; i < historyData.length; i++)
-	{
-		addElementToHistory(historyData[i], i);
-	}
-}
 
 function addElementToHistory(mood, i)
 {
@@ -98,7 +114,7 @@ function addElementToHistory(mood, i)
 
 	//console.log("found moodId: " + mood.moodId);
 	var dateString = dateToDMYHMS(date);
-	var moodName = new Array(5);
+	moodName = new Array(5);
 	moodName[0]="Depressed";
 	moodName[1]="Sad";
 	moodName[2]="OK";
@@ -109,6 +125,17 @@ function addElementToHistory(mood, i)
 	newMood = historyList[i];
 	$('#historyList').append("<li id='1' class='ui-li-has-multiline'>" +  //<a href='mood_details.html' onclick='saveDetailedMood(" + newMood + ")'>" +
 			moodName + "<span class='ui-li-text-sub'>" + dateString + "</span></div></li>"); //</a></li>");
+}
+
+function fillHistory()
+{
+	//getMoodData();
+	//console.log("mooddata length: " + historyData.length);
+	
+	for(var i = 0; i < historyData.length; i++)
+	{
+		addElementToHistory(historyData[i], i);
+	}
 }
 
 function saveDetailedMood(newDetailedMood)
@@ -148,11 +175,6 @@ function addElementToMoodDetails(moodId, name)
 	}
 }
 
-function capitalize(s)
-{
-    return s[0].toUpperCase() + s.slice(1);
-}
-
 function showMoodDetails(moodEntry)
 {
 	var x;
@@ -176,26 +198,6 @@ function showMoodDetails(moodEntry)
 
 
 
-function dateToDMYHMS(date) {
-	var weekday=new Array(7);
-	weekday[0]="Sunday";
-	weekday[1]="Monday";
-	weekday[2]="Tuesday";
-	weekday[3]="Wednesday";
-	weekday[4]="Thursday";
-	weekday[5]="Friday";
-	weekday[6]="Saturday";
-	
-	function pad(n){return n<10 ? '0'+n : n}
-	
-	var dayName = weekday[date.getDay()];
-	var hour = pad(date.getHours());
-	var minutes = pad(date.getMinutes());
-	var seconds = pad(date.getSeconds());
-
-	return dayName + ", " + date.toLocaleDateString() + " " + hour + ":" + minutes + ':' + seconds;
-	
-}
 
 function welcomeWizardCompleted() {
 
@@ -354,11 +356,11 @@ function openBrowser(action)
 	var url = "";
 	if(action == "site")
 	{
-		url = "https://quantimo.do"
+		url = "https://quantimo.do";
 	}
 	else if(action == "register")
 	{
-		url = "https://quantimo.do/wp-login.php/action=register"
+		url = "https://quantimo.do/wp-login.php/action=register";
 	}
 	var appControl = new tizen.ApplicationControl("http://tizen.org/appcontrol/operation/view",url);
 

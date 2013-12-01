@@ -145,40 +145,48 @@ moodiModoDB.indexedDB.onerror = function(e) {
 	console.log(e);
 };
 
-moodiModoDB.indexedDB.open = function() {
+moodiModoDB.indexedDB.open = function() 
+{
 	var request = indexedDB.open(dbName);
 	
-	request.onsuccess = function(e) {
+	request.onsuccess = function(e) 
+	{
 		//console.log ("success our DB: " + dbName + " is open and ready for work");
 		var moodiModoDB = e.target.result;
 		return e.target.result;
-	}
+	};
 
-	request.onupgradeneeded = function(e) {
+	request.onupgradeneeded = function(e) 
+	{
 		var moodiModoDB = e.target.result;
 		var db = moodiModoDB;
 		//console.log ("Going to upgrade our DB from version: "+ e.oldVersion + " to " + e.newVersion);
 
-		try {
-			if (db.objectStoreNames && db.objectStoreNames.contains("moodEntry")) {
+		try 
+		{
+			if (db.objectStoreNames && db.objectStoreNames.contains("moodEntry")) 
+			{
 				db.deleteObjectStore("moodEntry");
 			}
 		}
-		catch (err) {
+		catch (err) 
+		{
 			console.log("got err in objectStoreNames:" + err);
 		}
 		var store = db.createObjectStore("moodEntry",{keyPath: "timestamp"});
 		//var authorIndex = store.createIndex("moodId", "moodId");
 		//console.log("-- onupgradeneeded store:"+ JSON.stringify(store));
-	}
+	};
 	
-	request.onfailure = function(e) {
+	request.onfailure = function(e) 
+	{
 		console.error("could not open our DB! Err:"+e);  
-	}
+	};
 
-	request.onerror = function(e) {
+	request.onerror = function(e) 
+	{
 		console.error("Well... How should I put it? We have some issues with our DB! Err:"+e);
-	}
+	};
 };
 
 moodiModoDB.indexedDB.addMood = function(moodResult) {
@@ -233,10 +241,10 @@ moodiModoDB.indexedDB.addMood = function(moodResult) {
 			moodData.pop(moodResult);
 			//TODO: Show message to user
 		};
-	}
+	};
 	request.onerror = function () {
 	    console.log("Oopsie!");
-	}
+	};
 };
 
 /*moodiModoDB.indexedDB.getTodoItem = function(timestamp) {
@@ -320,10 +328,10 @@ moodiModoDB.indexedDB.getAllTodoItems = function() {
 		};
 	
 		cursorRequest.onerror = moodiModoDB.indexedDB.onerror;
-	}
+	};
 	request.onerror = function () {
 	    console.log("Oopsie!");
-	}
+	};
 };
 
 

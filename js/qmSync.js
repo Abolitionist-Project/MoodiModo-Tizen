@@ -77,7 +77,7 @@ var toQuantimodoRecord = function(moodEntry)
 		}
 	}
 	return records;
-}
+};
 
 var putMeasurementsSynchronous = function(token, records)
 {
@@ -145,5 +145,5 @@ var putMeasurementsSynchronous = function(token, records)
 	Log.i("QMSDK", "Done in : " + elapsedTime + ", millis per record: " + (elapsedTime / records.size()));
 
 	return null;
-}
+};
 

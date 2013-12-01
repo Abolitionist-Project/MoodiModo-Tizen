@@ -1,24 +1,3 @@
-//-------MoodNotification interval-------//
-function getMoodNotificationInterval()
-{
-	if(localStorage.getItem("moodNotificationInterval") != null)
-	{
-		return localStorage.getItem("moodNotificationInterval");
-	}
-	else
-	{
-		localStorage.setItem("moodNotificationInterval", 2);
-		return localStorage.getItem("moodNotificationInterval");
-	}
-}
-
-function setMoodNotificationInterval(value)
-{
-	localStorage.setItem("moodNotificationInterval", value);
-	setMoodAlarm();
-}
-
-//
 //-------------Mood alarms-------------//
 function setMoodAlarm()
 {
@@ -60,8 +39,8 @@ function setMoodAlarm()
 				localStorage.setItem("moodAlarmId", alarmHourly.id);
 			}
 		}
-		catch (e){
-	        console.log("Exception: " + e);
+		catch (eq){
+	        console.log("Exception: " + eq);
 	    }
 	}
 		
@@ -86,8 +65,8 @@ function setMoodAlarm()
 			}
 		
 		}
-		catch (e){
-	        console.log("Exception: " + e);
+		catch (e2){
+	        console.log("Exception: " + e2);
 	    }
 		
 	}
@@ -113,8 +92,8 @@ function setMoodAlarm()
 			}
 		
 		}
-		catch (e){
-	        console.log("Exception: " + e);
+		catch (e3){
+	        console.log("Exception: " + e3);
 	    }
 		
 	}
@@ -142,8 +121,8 @@ function setMoodAlarm()
 			}
 			
 		}
-		catch (e){
-	        console.log("Exception: " + e);
+		catch (e4){
+	        console.log("Exception: " + e4);
 	    }
 			
 	}
@@ -175,3 +154,24 @@ function setMoodAlarm()
 			
 	}*/
 }
+//-------MoodNotification interval-------//
+function getMoodNotificationInterval()
+{
+	if(localStorage.getItem("moodNotificationInterval") != null)
+	{
+		return localStorage.getItem("moodNotificationInterval");
+	}
+	else
+	{
+		localStorage.setItem("moodNotificationInterval", 2);
+		return localStorage.getItem("moodNotificationInterval");
+	}
+}
+
+function setMoodNotificationInterval(value)
+{
+	localStorage.setItem("moodNotificationInterval", value);
+	setMoodAlarm();
+}
+
+//

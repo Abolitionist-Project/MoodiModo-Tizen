@@ -51,7 +51,7 @@ var initLineChart = function() {
 	});
 	
 	
-}
+};
 
 
 //-------------init barchart-------------//
@@ -118,7 +118,7 @@ var initCharts = function() {
 	initLineChart();
 	initBarChart();
 	//console.log("charts loaded");
-}
+};
 
 $(document).bind('pagebeforeshow', '#home', function() {
 	//getBarChartData();
