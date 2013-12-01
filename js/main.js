@@ -44,9 +44,6 @@ function setCheckedValue(radioObj, newValue) {
 		if(radioObj[i].value == newValue.toString()) {
 			setMoodNotificationInterval(radioObj[i].value);
 			$("#radio-" + i).prop("checked", true).checkboxradio("refresh");
-			//console.log("checkedRadio: " + radioObj[i].value);
-			//console.log("moodNotificationInterval: " + getMoodNotificationInterval());
-			//localStorage.s
 		}
 		else 
 		{
@@ -102,7 +99,7 @@ function addElementToHistory(mood, i)
 	//console.log("found moodId: " + mood.moodId);
 	var dateString = dateToDMYHMS(date);
 	var moodName = new Array(5);
-	moodName[0]="Suicidal";
+	moodName[0]="Depressed";
 	moodName[1]="Sad";
 	moodName[2]="OK";
 	moodName[3]="Happy";
@@ -122,7 +119,7 @@ function saveDetailedMood(newDetailedMood)
 function addElementToMoodDetails(moodId, name)
 {
 	var moodName = new Array(5);
-	moodName[0]="Suicidal";
+	moodName[0]="Depressed";
 	moodName[1]="Sad";
 	moodName[2]="OK";
 	moodName[3]="Happy";

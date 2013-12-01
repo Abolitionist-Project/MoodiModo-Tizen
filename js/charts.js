@@ -1,5 +1,5 @@
 //Initialize function
-var moodLabels = [ "Suicidal", "Sad", "OK", "Happy", "Ecstatic" ];
+var moodLabels = [ "Depressed", "Sad", "OK", "Happy", "Ecstatic" ];
 var colors = [ "#55000000", "#5D83FF", "#68B107", "#ffbd40", "#CB0000" ];
 var lineChartData = [];
 var barChartData = [];
@@ -41,6 +41,9 @@ var initLineChart = function() {
 				}
 			}
 		},
+		credits: {
+			enabled: false
+		},
 		series : [ {
 			name : 'Your mood',
 			data : lineChartData
@@ -78,7 +81,7 @@ var initBarChart = function() {
 			text : ''
 		},
 		xAxis : {
-			categories : [ 'Suicidal', 'Sad', 'OK', 'Happy', 'Ecstatic' ]
+			categories : [ 'Depressed', 'Sad', 'OK', 'Happy', 'Ecstatic' ]
 		},
 		yAxis : {
 			title : {
@@ -97,6 +100,9 @@ var initBarChart = function() {
 				enableMouseTracking : false,
 				colorByPoint : true
 			}
+		},
+		credits: {
+			enabled: false
 		},
 		colors : colors,
 		series : [ {

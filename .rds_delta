@@ -2,5 +2,6 @@
 #add
 #modify
 res/wgt/author-signature.xml
-res/wgt/js/indexedDB.js
+res/wgt/index.html
+res/wgt/report_mood.html
 res/wgt/signature1.xml
