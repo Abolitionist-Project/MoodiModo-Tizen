@@ -136,6 +136,7 @@ function fillHistory()
 	{
 		addElementToHistory(historyData[i], i);
 	}
+	
 }
 
 function saveDetailedMood(newDetailedMood)
@@ -219,7 +220,8 @@ function saveMoodQuestions() {
 
 function finishMoodReporting(manually) {
 	entry = new moodEntry(questionAnswers);
-	moodiModoDB.indexedDB.addMood(entry);
+	addMood(entry);
+	
 	if(manually == "false" || manually == false) 
 	{
 		tizen.application.getCurrentApplication().exit();
@@ -411,6 +413,11 @@ $(document).delegate('#home', 'pagebeforecreate', function() {
 	}
 	else
 	{
+		if(moodData.length == 0)
+		{
+			openDatabase();
+		}
+		//initMoodData2();
 		//alert("not first startup");
 	}
 });
@@ -429,8 +436,31 @@ $(document).delegate('#history', 'pagecreate', function() {
 
 $(document).delegate('#home', 'pageshow', function()
 {
-	lineChart.series[0].setData(lineChartData);
-	barChart.series[0].setData(barChartData);
+	if(lineChartData.length == 0)
+	{
+		lineChart.showLoading();
+		lineChart.series[0].setVisible(false);
+		setTimeout(function(){
+			lineChart.series[0].setData(lineChartData);
+			lineChart.hideLoading();
+			lineChart.series[0].setVisible(true,true);
+		},3000);
+	}
+	if(barChartData.length == 0)
+	{
+		barChart.showLoading();
+		barChart.series[0].setVisible(false);
+		setTimeout(function(){
+			barChart.series[0].setData(barChartData);
+			barChart.hideLoading();
+			barChart.series[0].setVisible(true,true);
+		},2000);
+	}
+	else {
+		lineChart.series[0].setData(lineChartData);
+		barChart.series[0].setData(barChartData);
+	}
+	
 	//window.location.reload()
 });
 

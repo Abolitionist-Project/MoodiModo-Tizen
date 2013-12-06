@@ -27,6 +27,16 @@ var initLineChart = function() {
 		legend : {
 			enabled : false
 		},
+		lang: {
+			loading: ''
+		},
+		loading: {
+			style: {
+				background: 'url(/res/loading3.gif) no-repeat center'
+			},
+            hideDuration: 10,
+            showDuration: 10
+		},
 		plotOptions : {
 			spline : {
 				lineWidth : 2,
@@ -75,7 +85,10 @@ var initBarChart = function() {
 			borderColor : '#DEDCD5',
 			height : 400,
 			type : 'column',
-			renderTo : 'BarContainer'
+			renderTo : 'BarContainer',
+			animation: {
+                duration: 1000
+            }
 		},
 		title : {
 			text : ''
@@ -88,6 +101,16 @@ var initBarChart = function() {
 				text : ''
 			},
 			min : 0
+		},
+		lang: {
+			loading: ''
+		},
+		loading: {
+			style: {
+				background: 'url(/res/loading3.gif) no-repeat center'
+			},
+            hideDuration: 10,
+            showDuration: 10
 		},
 		legend : {
 			enabled : false
@@ -124,7 +147,8 @@ $(document).bind('pagebeforeshow', '#home', function() {
 	//getBarChartData();
 	//console.log("db manager barchart data to chart data");
 	//initLineChartData();
-	initMoodData();
+	//initMoodData2();
+	openDatabase();
 	//getMoodData();
 	//initBarChartData();
 	initCharts();
